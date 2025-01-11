@@ -13,6 +13,7 @@ import {
   FaNpm,
   FaFigma,
   FaDatabase,
+  FaRobot,
 } from "react-icons/fa";
 
 import content from "./content";
@@ -57,7 +58,7 @@ function SkillCircleGroups() {
               transition={{ duration: 0.6, delay: i * 0.1 }}
               whileHover={{ scale: 1.1 }}
             >
-              {iconMap[skill] || <FaReact size={36} className="text-cyan-400" />}
+              {iconMap[skill] || <FaRobot size={36} className="text-gray-400" />}
               <p className="text-xs text-gray-300 mt-1">{skill}</p>
             </motion.div>
           ))}

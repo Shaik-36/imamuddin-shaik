@@ -80,6 +80,18 @@ const content = {
           "Improved user experience with an intuitive interface, increasing form completion rates by 25%.",
         ],
       },
+      {
+        title: "Associate Software Engineer",
+        company: "DXC Technology, Bangalore",
+        period: "Aug 2021 – Dec 2022",
+        description: [
+          "As a Automate tool specialist, I identified areas for improvement, designed a workflow reducing human effort",
+          "Designed and implemented workflows that reduced human effort by 40%, enhancing operational efficiency",
+          "Delivered an average of 8 automated workflows/scripts per month to streamline customer support processes",
+          "Achieved an average resolution time of under 2 hours, ensuring prompt responses to customer inquiries",
+          "Maintained an 85% integration success rate and kept security incidents below 0.5%, ensuring compliance and data protection",
+        ],
+      },
     ],
     education: [
       {

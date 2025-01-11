@@ -250,7 +250,7 @@ export default function App() {
           whileInView="visible"
           viewport={{ once: true }}
         >
-          Skills
+          I'm Skilled At
         </motion.h2>
         <div className="container mx-auto px-4">
           <SkillCircleGroups />
@@ -267,7 +267,7 @@ export default function App() {
           whileInView="visible"
           viewport={{ once: true }}
         >
-          Experience
+          Experience/Education
         </motion.h2>
         <div className="container mx-auto max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-12 text-left">
           {/* Left: Work Experience timeline */}
