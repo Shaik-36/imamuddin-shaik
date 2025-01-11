@@ -6,6 +6,8 @@ import { FaLinkedin, FaGithub, FaTwitter, FaEnvelope, FaPhone } from "react-icon
 import { GiMagicGate } from "react-icons/gi"; // Example “logo” icon
 import content from "./content";
 import SkillCircleGroups from "./SkillCircleGroups";
+import ImamuddinResume from "./assets/Imamuddin_resume.pdf";
+
 
 // Reusable fade-up animation
 const fadeUp = {
@@ -158,10 +160,18 @@ export default function App() {
               {/* Download Resume */}
               <button
                 className="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg text-sm md:text-base font-semibold shadow"
-                onClick={() => window.open(personal.resumeLink, "_blank")}
+                onClick={() => {
+                  const link = document.createElement("a");
+                  link.href = ImamuddinResume;          // Points to the imported PDF
+                  link.setAttribute("download", "Imamuddin_resume.pdf");
+                  document.body.appendChild(link);
+                  link.click();
+                  document.body.removeChild(link);
+                }}
               >
                 Download Resume
               </button>
+
 
               {/* Call Me (answered by AI) */}
               <button
@@ -248,10 +258,8 @@ export default function App() {
       </section>
 
       {/* EXPERIENCE SECTION */}
-      <section
-        id="experience"
-        className="bg-[#1f2634] py-16 px-4 text-center"
-      >
+{/* EXPERIENCE SECTION: side-by-side timeline */}
+<section id="experience" className="bg-[#1f2634] py-16 px-4 text-center">
         <motion.h2
           className="text-4xl font-extrabold mb-10"
           variants={fadeUp}
@@ -261,35 +269,51 @@ export default function App() {
         >
           Experience
         </motion.h2>
-        <div className="container mx-auto max-w-4xl text-left grid grid-cols-1 md:grid-cols-2 gap-12">
-          {/* Work */}
+        <div className="container mx-auto max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-12 text-left">
+          {/* Left: Work Experience timeline */}
           <motion.div
-            className="space-y-4"
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
           >
-            <h3 className="text-xl font-bold text-purple-400 mb-2">Work</h3>
-            {experience.work.map((item, i) => (
-              <p key={i} className="text-gray-300">
-                {item}
-              </p>
+            <h3 className="text-2xl font-bold text-purple-400 mb-6">
+              Work Experience
+            </h3>
+            {experience.work.map((job, idx) => (
+              <div key={idx} className="relative pl-8 mb-8">
+                <div className="absolute left-1.5 top-0 h-full w-0.5 bg-gray-600"></div>
+                <div className="w-3 h-3 rounded-full bg-purple-400 absolute left-0 top-0"></div>
+                <h4 className="text-lg font-bold text-gray-200">
+                  {job.title}
+                </h4>
+                <p className="text-sm text-gray-300">
+                  {job.company} | {job.period}
+                </p>
+              </div>
             ))}
           </motion.div>
-          {/* Education */}
+          {/* Right: Education timeline */}
           <motion.div
-            className="space-y-4"
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
           >
-            <h3 className="text-xl font-bold text-blue-400 mb-2">Education</h3>
-            {experience.education.map((item, i) => (
-              <p key={i} className="text-gray-300">
-                {item}
-              </p>
+            <h3 className="text-2xl font-bold text-blue-400 mb-6">
+              Education
+            </h3>
+            {experience.education.map((ed, idx) => (
+              <div key={idx} className="relative pl-8 mb-8">
+                <div className="absolute left-1.5 top-0 h-full w-0.5 bg-gray-600"></div>
+                <div className="w-3 h-3 rounded-full bg-blue-400 absolute left-0 top-0"></div>
+                <h4 className="text-lg font-bold text-gray-200">
+                  {ed.degree}
+                </h4>
+                <p className="text-sm text-gray-300">
+                  {ed.institution} | {ed.period}
+                </p>
+              </div>
             ))}
           </motion.div>
         </div>
