@@ -1,52 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Particles from "react-tsparticles";
 import { loadFull } from "tsparticles";
-import { FaLinkedin, FaGithub, FaTwitter } from "react-icons/fa";
-
+import { FaLinkedin, FaGithub, FaTwitter, FaEnvelope, FaPhone } from "react-icons/fa";
+import { GiMagicGate } from "react-icons/gi"; // Example “logo” icon
 import content from "./content";
 import SkillCircleGroups from "./SkillCircleGroups";
 
-function App() {
+// Reusable fade-up animation
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+};
+
+export default function App() {
   const { personal, projects, experience } = content;
 
-  // For background starry effect (optional)
+  // For optional starry background
   const particlesInit = async (engine) => {
     await loadFull(engine);
   };
-
   const particlesOptions = {
     fpsLimit: 60,
-    background: {
-      color: "#0F172A",
-    },
+    background: { color: "#0E1217" },
     interactivity: {
-      events: {
-        onHover: { enable: true, mode: "repulse" },
-      },
-      modes: {
-        repulse: { distance: 120, duration: 0.4 },
-      },
+      events: { onHover: { enable: true, mode: "repulse" } },
+      modes: { repulse: { distance: 100, duration: 0.4 } },
     },
     particles: {
-      number: { value: 40, density: { enable: true, area: 600 } },
+      number: { value: 30, density: { enable: true, area: 800 } },
       color: { value: "#ffffff" },
       shape: { type: "circle" },
-      opacity: { value: 0.3 },
+      opacity: { value: 0.2 },
       size: { value: 2 },
-      move: { enable: true, speed: 1.2 },
+      move: { enable: true, speed: 1 },
     },
   };
 
-  // Simple fade-up for section headings
-  const headingVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-  };
+  // State for the "Reach Me" dropdown
+  const [reachOpen, setReachOpen] = useState(false);
 
   return (
-    <div className="text-gray-100 font-sans min-h-screen w-full relative">
-      {/* Background Particles (optional). Remove if you want a plain background */}
+    <div className="relative text-gray-100 font-sans min-h-screen overflow-x-hidden">
+      {/* Optional Particles Background */}
       <Particles
         id="tsparticles"
         init={particlesInit}
@@ -54,35 +50,42 @@ function App() {
         className="absolute inset-0 -z-10"
       />
 
-      {/* NAVBAR */}
-      <nav className="fixed top-0 w-full z-50 bg-gradient-to-r from-purple-600 to-pink-500 p-4 shadow-lg">
+      {/* NAVIGATION BAR */}
+      <nav className="fixed w-full z-50 bg-[#111827] bg-opacity-90 p-4 shadow-md">
         <div className="container mx-auto flex justify-between items-center">
-          <h1 className="text-2xl md:text-3xl font-bold tracking-wider uppercase">
-            {personal.name}
-          </h1>
+          {/* Logo + Cursive Name */}
+          <div className="flex items-center gap-2">
+            <GiMagicGate size={28} className="text-purple-300" />
+            {/* Example of cursive/italic using Tailwind classes */}
+            <span className="font-bold italic text-xl md:text-2xl font-[cursive] tracking-wide">
+              Imamuddin Shaik
+            </span>
+          </div>
+
+          {/* Nav Links (Desktop) */}
           <ul className="hidden md:flex space-x-6 font-medium">
             <li>
-              <a href="#about" className="hover:text-gray-200 transition">
-                About
+              <a href="#profile" className="hover:text-purple-300 transition">
+                Profile
               </a>
             </li>
             <li>
-              <a href="#skills" className="hover:text-gray-200 transition">
+              <a href="#skills" className="hover:text-purple-300 transition">
                 Skills
               </a>
             </li>
             <li>
-              <a href="#experience" className="hover:text-gray-200 transition">
+              <a href="#experience" className="hover:text-purple-300 transition">
                 Experience
               </a>
             </li>
             <li>
-              <a href="#projects" className="hover:text-gray-200 transition">
+              <a href="#projects" className="hover:text-purple-300 transition">
                 Projects
               </a>
             </li>
             <li>
-              <a href="#contact" className="hover:text-gray-200 transition">
+              <a href="#contact" className="hover:text-purple-300 transition">
                 Contact
               </a>
             </li>
@@ -90,100 +93,156 @@ function App() {
         </div>
       </nav>
 
-      {/* HERO SECTION */}
-      <header className="pt-16 pb-24 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900">
-        <div className="container mx-auto px-4 text-center">
-          <motion.h2
-            className="text-5xl md:text-7xl font-extrabold mb-4"
-            variants={headingVariants}
-            initial="hidden"
-            animate="visible"
-          >
-            {personal.name}
-          </motion.h2>
-          <motion.p
-            className="text-2xl md:text-3xl mb-8"
-            variants={headingVariants}
-            initial="hidden"
-            animate="visible"
-            transition={{ delay: 0.2 }}
-          >
-            {personal.tagline}
-          </motion.p>
-          <motion.button
-            variants={headingVariants}
-            initial="hidden"
-            animate="visible"
-            transition={{ delay: 0.4 }}
-            whileHover={{ scale: 1.05 }}
-            className="bg-purple-600 hover:bg-purple-700 px-6 py-3 rounded-lg text-lg font-semibold shadow-lg"
-            onClick={() => window.open(personal.resumeLink, "_blank")}
-          >
-            {personal.contactButtonText}
-          </motion.button>
-        </div>
-      </header>
-
-      {/* ABOUT SECTION */}
+      {/* PROFILE SECTION (Hero) */}
       <section
-        id="about"
-        className="bg-gray-900 pb-16 pt-12 relative overflow-hidden"
+        id="profile"
+        className="pt-16 pb-24 bg-gradient-to-b from-gray-900 via-[#1a1f2e] to-gray-900"
       >
-        <div className="container mx-auto px-4 text-center">
-          <motion.h2
-            className="text-4xl font-extrabold mb-8"
-            variants={headingVariants}
+        <div className="container mx-auto px-4 flex flex-col md:flex-row items-center justify-center gap-12 text-center md:text-left">
+          {/* Left: Avatar with neon ring */}
+          <motion.div
+            className="md:flex-1 flex justify-center"
+            variants={fadeUp}
             initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
+            animate="visible"
           >
-            About Me
-          </motion.h2>
+            <div className="relative">
+              {/* Outer ring for flair */}
+              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 blur-sm"></div>
+              {/* Actual photo or cartoon image */}
+              <img
+                src={personal.avatar}
+                alt="Profile"
+                className="relative w-48 h-48 md:w-56 md:h-56 rounded-full border-4 border-gray-900 object-cover"
+              />
+            </div>
+          </motion.div>
 
-          <div className="flex flex-col md:flex-row md:items-center md:justify-center gap-8">
-            <motion.img
-              src={personal.avatar}
-              alt="Avatar"
-              className="w-40 h-40 md:w-48 md:h-48 rounded-full border-4 border-purple-600 mx-auto"
-              variants={headingVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-            />
+          {/* Right: Headline, bullets, 4 CTA buttons */}
+          <motion.div
+            className="md:flex-1 space-y-6"
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            transition={{ delay: 0.1 }}
+          >
+            <h2 className="text-3xl md:text-5xl font-extrabold">
+              Full Stack & AI Developer
+            </h2>
+            <p className="text-lg text-gray-300 leading-relaxed">
+              I specialize in building intelligent, data-driven web solutions
+              using modern technologies. With strong expertise in MERN stack,
+              AI/ML, and cloud deployments, I can transform your ideas into
+              robust, scalable applications.
+            </p>
+            <ul className="list-none space-y-2 text-left mx-auto md:mx-0">
+              <li className="flex items-center gap-2">
+                <span className="text-purple-400 text-xl">•</span>
+                MERN Stack & GraphQL
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="text-purple-400 text-xl">•</span>
+                AI/ML Integrations
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="text-purple-400 text-xl">•</span>
+                Cloud Deployments (AWS, Docker)
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="text-purple-400 text-xl">•</span>
+                End-to-End Web Solutions
+              </li>
+            </ul>
 
-            <motion.div
-              className="max-w-2xl text-left mx-auto"
-              variants={headingVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-            >
-              <p className="leading-relaxed text-gray-200 mb-4">
-                {personal.description}
-              </p>
+            <div className="flex flex-wrap items-center gap-4 mt-4">
+              {/* Download Resume */}
               <button
-                className="mt-4 bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-lg font-semibold shadow-md"
+                className="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg text-sm md:text-base font-semibold shadow"
                 onClick={() => window.open(personal.resumeLink, "_blank")}
               >
                 Download Resume
               </button>
-            </motion.div>
-          </div>
+
+              {/* Call Me (answered by AI) */}
+              <button
+                className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg text-sm md:text-base font-semibold shadow flex items-center gap-2"
+                onClick={() =>
+                  alert(
+                    "Initiating AI-based call... (placeholder functionality)."
+                  )
+                }
+              >
+                <FaPhone /> Call Me (answered by AI)
+              </button>
+
+              {/* Reach Me (dropdown) */}
+              <div className="relative">
+                <button
+                  className="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg text-sm md:text-base font-semibold shadow"
+                  onClick={() => setReachOpen((prev) => !prev)}
+                >
+                  Reach Me
+                </button>
+                {reachOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    className="absolute top-12 left-0 bg-gray-800 rounded shadow-lg py-2 px-3 z-10"
+                  >
+                    {/* LinkedIn */}
+                    <a
+                      href={personal.socialLinks.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-gray-200 hover:text-blue-400 py-1"
+                    >
+                      <FaLinkedin /> LinkedIn
+                    </a>
+                    {/* Email */}
+                    <a
+                      href={`mailto:someone@example.com`} 
+                      className="flex items-center gap-2 text-gray-200 hover:text-blue-400 py-1"
+                    >
+                      <FaEnvelope /> Email
+                    </a>
+                    {/* Twitter */}
+                    <a
+                      href={personal.socialLinks.twitter}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-gray-200 hover:text-blue-400 py-1"
+                    >
+                      <FaTwitter /> Twitter
+                    </a>
+                  </motion.div>
+                )}
+              </div>
+
+              {/* See My Work (GitHub) */}
+              <button
+                className="bg-pink-600 hover:bg-pink-700 px-4 py-2 rounded-lg text-sm md:text-base font-semibold shadow flex items-center gap-2"
+                onClick={() => window.open(personal.socialLinks.github, "_blank")}
+              >
+                <FaGithub /> See My Work
+              </button>
+            </div>
+          </motion.div>
         </div>
       </section>
 
       {/* SKILLS SECTION */}
-      <section id="skills" className="bg-gray-800 py-16 relative overflow-hidden">
-        <div className="container mx-auto px-4 text-center">
-          <motion.h2
-            className="text-4xl font-extrabold mb-8"
-            variants={headingVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            Skills
-          </motion.h2>
+      <section id="skills" className="bg-[#252c3c] py-16">
+        <motion.h2
+          className="text-4xl font-extrabold mb-10 text-center"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          Skills
+        </motion.h2>
+        <div className="container mx-auto px-4">
           <SkillCircleGroups />
         </div>
       </section>
@@ -191,66 +250,66 @@ function App() {
       {/* EXPERIENCE SECTION */}
       <section
         id="experience"
-        className="bg-gray-900 py-16 relative overflow-hidden"
+        className="bg-[#1f2634] py-16 px-4 text-center"
       >
-        <div className="container mx-auto px-4 text-center">
-          <motion.h2
-            className="text-4xl font-extrabold mb-8"
-            variants={headingVariants}
+        <motion.h2
+          className="text-4xl font-extrabold mb-10"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          Experience
+        </motion.h2>
+        <div className="container mx-auto max-w-4xl text-left grid grid-cols-1 md:grid-cols-2 gap-12">
+          {/* Work */}
+          <motion.div
+            className="space-y-4"
+            variants={fadeUp}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
           >
-            Experience
-          </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto text-left">
-            <motion.div
-              variants={headingVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-            >
-              <h3 className="text-2xl font-bold mb-4 text-purple-400">Work</h3>
-              {experience.work.map((item, i) => (
-                <p key={i} className="mb-2 text-gray-200">
-                  {item}
-                </p>
-              ))}
-            </motion.div>
-            <motion.div
-              variants={headingVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-            >
-              <h3 className="text-2xl font-bold mb-4 text-blue-400">
-                Education
-              </h3>
-              {experience.education.map((item, i) => (
-                <p key={i} className="mb-2 text-gray-200">
-                  {item}
-                </p>
-              ))}
-            </motion.div>
-          </div>
+            <h3 className="text-xl font-bold text-purple-400 mb-2">Work</h3>
+            {experience.work.map((item, i) => (
+              <p key={i} className="text-gray-300">
+                {item}
+              </p>
+            ))}
+          </motion.div>
+          {/* Education */}
+          <motion.div
+            className="space-y-4"
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            <h3 className="text-xl font-bold text-blue-400 mb-2">Education</h3>
+            {experience.education.map((item, i) => (
+              <p key={i} className="text-gray-300">
+                {item}
+              </p>
+            ))}
+          </motion.div>
         </div>
       </section>
 
       {/* PROJECTS SECTION */}
-      <section id="projects" className="bg-gray-800 py-16 relative overflow-hidden">
-        <div className="container mx-auto px-4 text-center">
-          <motion.h2
-            className="text-4xl font-extrabold mb-8"
-            variants={headingVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            Projects
-          </motion.h2>
+      <section id="projects" className="bg-[#252c3c] py-16">
+        <motion.h2
+          className="text-4xl font-extrabold mb-10 text-center"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          Projects
+        </motion.h2>
+        <div className="container mx-auto px-4">
           <motion.div
             className="grid grid-cols-1 md:grid-cols-3 gap-6"
-            variants={headingVariants}
+            variants={fadeUp}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
@@ -258,8 +317,8 @@ function App() {
             {projects.map((project, idx) => (
               <motion.div
                 key={idx}
-                whileHover={{ scale: 1.05 }}
-                className="bg-gray-700 p-6 rounded shadow-md hover:shadow-lg"
+                whileHover={{ scale: 1.03 }}
+                className="bg-gray-800 p-6 rounded shadow hover:shadow-lg"
               >
                 <h3 className="text-xl font-bold text-purple-300">
                   {project.title}
@@ -280,82 +339,78 @@ function App() {
       </section>
 
       {/* CONTACT SECTION */}
-      <section id="contact" className="bg-gray-900 py-16 relative overflow-hidden">
-        <div className="container mx-auto px-4 text-center">
-          <motion.h2
-            className="text-4xl font-extrabold mb-8"
-            variants={headingVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
+      <section id="contact" className="bg-[#1f2634] py-16 px-4 text-center">
+        <motion.h2
+          className="text-4xl font-extrabold mb-6"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          Contact Me
+        </motion.h2>
+        <p className="text-gray-400 mb-6">
+          Let’s connect—feel free to reach out on LinkedIn, GitHub, or Twitter!
+        </p>
+        <div className="flex justify-center space-x-6 mb-8">
+          <a
+            href={personal.socialLinks.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-400 hover:text-blue-500"
           >
-            Contact Me
-          </motion.h2>
-          <p className="text-gray-400 mb-6">
-            Feel free to reach out via LinkedIn, GitHub, or Twitter!
-          </p>
-          <div className="flex justify-center space-x-6 mb-8">
-            <a
-              href={personal.socialLinks.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-400 hover:text-blue-500"
-            >
-              <FaLinkedin size={32} />
-            </a>
-            <a
-              href={personal.socialLinks.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-400 hover:text-gray-500"
-            >
-              <FaGithub size={32} />
-            </a>
-            <a
-              href={personal.socialLinks.twitter}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-400 hover:text-blue-500"
-            >
-              <FaTwitter size={32} />
-            </a>
-          </div>
-
-          <motion.form
-            className="max-w-lg mx-auto text-left"
-            variants={headingVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
+            <FaLinkedin size={32} />
+          </a>
+          <a
+            href={personal.socialLinks.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-400 hover:text-gray-500"
           >
-            <div className="grid grid-cols-1 gap-6">
-              <input
-                type="text"
-                placeholder="Your Name"
-                className="w-full px-4 py-2 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
-              />
-              <input
-                type="email"
-                placeholder="Your Email"
-                className="w-full px-4 py-2 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
-              />
-              <textarea
-                placeholder="Your Message"
-                rows="4"
-                className="w-full px-4 py-2 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
-              ></textarea>
-              <button
-                type="submit"
-                className="w-full bg-purple-600 hover:bg-purple-700 px-6 py-3 rounded-lg text-lg font-semibold shadow-md"
-              >
-                Send Message
-              </button>
-            </div>
-          </motion.form>
+            <FaGithub size={32} />
+          </a>
+          <a
+            href={personal.socialLinks.twitter}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-400 hover:text-blue-500"
+          >
+            <FaTwitter size={32} />
+          </a>
         </div>
+
+        <motion.form
+          className="max-w-lg mx-auto text-left"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          <div className="grid grid-cols-1 gap-6">
+            <input
+              type="text"
+              placeholder="Your Name"
+              className="w-full px-4 py-2 rounded bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
+            />
+            <input
+              type="email"
+              placeholder="Your Email"
+              className="w-full px-4 py-2 rounded bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
+            />
+            <textarea
+              placeholder="Your Message"
+              rows="4"
+              className="w-full px-4 py-2 rounded bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
+            ></textarea>
+            <button
+              type="submit"
+              className="w-full bg-purple-600 hover:bg-purple-700 px-6 py-3 rounded text-lg font-semibold shadow"
+            >
+              Send Message
+            </button>
+          </div>
+        </motion.form>
       </section>
     </div>
   );
 }
-
-export default App;
