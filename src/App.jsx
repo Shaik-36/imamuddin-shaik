@@ -140,7 +140,7 @@ export default function App() {
             <ul className="list-none space-y-2 text-left mx-auto md:mx-0">
               <li className="flex items-center gap-2">
                 <span className="text-purple-400 text-xl">•</span>
-                MERN Stack & GraphQL
+                MERN Stack Development
               </li>
               <li className="flex items-center gap-2">
                 <span className="text-purple-400 text-xl">•</span>
@@ -148,11 +148,11 @@ export default function App() {
               </li>
               <li className="flex items-center gap-2">
                 <span className="text-purple-400 text-xl">•</span>
-                Cloud Deployments (AWS, Docker)
+                Cloud Deployments (Vercel, AWS, Docker)
               </li>
               <li className="flex items-center gap-2">
                 <span className="text-purple-400 text-xl">•</span>
-                End-to-End Web Solutions
+                AI Agents(Currently Learning)
               </li>
             </ul>
 
