@@ -178,7 +178,7 @@ export default function App() {
                 className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg text-sm md:text-base font-semibold shadow flex items-center gap-2"
                 onClick={() =>
                   alert(
-                    "Initiating AI-based call... (placeholder functionality)."
+                    "This function is still in process.....Please visit later to see the functionality"
                   )
                 }
               >
