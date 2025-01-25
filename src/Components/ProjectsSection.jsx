@@ -2,8 +2,13 @@ import React from "react";
 import { motion } from "framer-motion";
 
 export default function ProjectsSection({ projects, selectedLanguage, setSelectedLanguage }) {
-  const availableLanguages = Object.keys(projects);
-  const filteredProjects = projects[selectedLanguage] || projects.Default;
+  const availableLanguages = ["All", ...Object.keys(projects)];
+  
+  // Aggregating all projects when "All" is selected
+  const filteredProjects = 
+    selectedLanguage === "All"
+      ? Object.values(projects).flat()
+      : projects[selectedLanguage] || [];
 
   return (
     <section id="projects" className="bg-[#252c3c] py-16">

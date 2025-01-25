@@ -9,7 +9,7 @@ import ContactSection from "./Components/ContactSection";
 import content from "./content";
 
 export default function App() {
-  const [selectedLanguage, setSelectedLanguage] = useState("JavaScript");
+  const [selectedLanguage, setSelectedLanguage] = useState("All");
 
   return (
     <div className="relative text-gray-100 font-sans min-h-screen overflow-x-hidden">

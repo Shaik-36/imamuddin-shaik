@@ -135,7 +135,7 @@ const content = {
         image: "https://private-user-images.githubusercontent.com/85993981/406668202-48ef3618-8cf7-4f43-9d54-594d0d03bd60.jpg?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3Mzc4MTYyOTUsIm5iZiI6MTczNzgxNTk5NSwicGF0aCI6Ii84NTk5Mzk4MS80MDY2NjgyMDItNDhlZjM2MTgtOGNmNy00ZjQzLTlkNTQtNTk0ZDBkMDNiZDYwLmpwZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTAxMjUlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwMTI1VDE0Mzk1NVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTMzM2I2MmFjY2YxZWU0NzQ3M2Q4YzAwOGY5NWYwMTk5YTNkNmNlMjgzZWE3MTBhNjg1MjRjNzA1ZjhjNjgxYzQmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0._WR7t4VJCO4VoBU93s-A_zrWQGrg16Wm_V2I5EVCMK8", // Replace with your image URL
       },
     ],
-    React: [
+    "C#": [
       {
         title: "Blog Website",
         description:
@@ -145,7 +145,7 @@ const content = {
         image: "./assets/blog-website.jpeg", // Add your project image path here
       },
     ],
-    Default: [
+    "Machine-Learning": [
       {
         title: "Sample Project",
         description: "This is a placeholder project for new languages.",
