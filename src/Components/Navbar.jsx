@@ -3,7 +3,7 @@ import imamLogo from '../assets/logo-main.png';
 
 export default function Navbar() {
   return (
-    <nav className="fixed w-full z-60 bg-[#111827] bg-opacity-90 p-4 shadow-lg">
+    <nav className="absolute w-full z-60 bg-[#111827] bg-opacity-90 p-4 shadow-lg">
       <div className="container mx-auto flex justify-between items-center">
         
         <div className="flex justify-center items-center gap-2 sm:justify-center">
