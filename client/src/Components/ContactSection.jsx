@@ -1,10 +1,11 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { FaLinkedin, FaGithub, FaTwitter } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 export default function ContactSection() {
   return (
-    <section id="contact" className="bg-[#1f2634] py-16 px-4 text-center">
+    <section id="contact" className="bg-[#1f2634] py-16 px-4 text-center relative">
       <h2 className="text-4xl font-extrabold mb-6">Contact Me</h2>
       <p className="text-gray-400 mb-6">
         Let’s connect—feel free to reach out on LinkedIn, GitHub, or Twitter!
@@ -65,6 +66,13 @@ export default function ContactSection() {
           </button>
         </div>
       </motion.form>
+      {/* Admin Panel Button */}
+      <Link
+        to="/admin"
+        className="absolute bottom-4 right-4 bg-gray-700 hover:bg-gray-800 text-white px-4 py-2 rounded-lg text-sm shadow-lg transition"
+      >
+        Admin Panel
+      </Link>
     </section>
   );
 }
