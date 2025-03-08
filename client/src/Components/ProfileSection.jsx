@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { FaLinkedin, FaGithub, FaTwitter, FaEnvelope, FaPhone } from "react-icons/fa";
-import ImamuddinResume from "../assets/Imamuddin_resume.pdf";
+import ImamuddinResume from "../assets/imam_resume.pdf";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
