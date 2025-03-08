@@ -178,7 +178,7 @@ const content = {
         description:
           "A modern weather application built using React that fetches real-time weather data from an API and displays temperature, humidity, wind speed, and other weather parameters.",
         techStack: "React, API Integration, Tailwind CSS, Vite",
-        link: "https://github.com/Shaik-36/Weather_App",
+        link: "https://github.com/Shaik-36/Weather_Show",
         image: weatherImg,
       }
     ],
