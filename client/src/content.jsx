@@ -13,8 +13,8 @@ import weatherImg from './images/weather.png';
 
 const content = {
   personal: {
-    name: "Imamuddin Shaik",
-    tagline: "Building intelligent web solutions with MERN and AI.",
+    name: "IMAMUDDIN SHAIK",
+    tagline: "Founding Software Engineer | Full-Stack Developer with AI",
     description:
       "I’m a full-stack developer specializing in building scalable web applications using the MERN stack (MongoDB, Express.js, React, Node.js). I also integrate AI/ML models to create intelligent and data-driven solutions. Passionate about solving real-world problems with clean, efficient, and modern technologies.",
     avatar: avatar,
