@@ -18,7 +18,10 @@ const content = {
     description:
       "I’m a full-stack developer specializing in building scalable web applications using the MERN stack (MongoDB, Express.js, React, Node.js). I also integrate AI/ML models to create intelligent and data-driven solutions. Passionate about solving real-world problems with clean, efficient, and modern technologies.",
     avatar: avatar,
-    resumeLink: "./assets/imam_resume.pdf", // or your real link
+    email: "imamshan369@gmail.com",
+    phone: "+44 7342 149330",
+    location: "London, England, United Kingdom",
+    resumeLink: "./assets/imam_resume.pdf",
     contactButtonText: "Contact Me",
     socialLinks: {
       linkedin: "https://www.linkedin.com/in/shaik-imam",
