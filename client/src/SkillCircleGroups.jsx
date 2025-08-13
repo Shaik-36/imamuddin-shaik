@@ -49,7 +49,6 @@ import {
   SiVite,
   SiRailway,
   SiGooglecloud,
-  SiCsharp,
   SiTensorflow,
   SiPandas,
   SiMatlab,
@@ -101,7 +100,7 @@ function SkillCircleGroups() {
     "Railway": <SiRailway size={40} className="text-purple-500" />,
 
     // Other Technologies
-    "C#": <SiCsharp size={40} className="text-purple-600" />,
+    "C#": <FaMicrosoft size={40} className="text-purple-600" />,
     "Python": <FaPython size={40} className="text-blue-400" />,
     "Java": <FaJava size={40} className="text-red-500" />,
     "Machine Learning": <FaBrain size={40} className="text-pink-400" />,
