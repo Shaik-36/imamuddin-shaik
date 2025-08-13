@@ -49,7 +49,6 @@ import {
   SiGooglecloud,
   SiTensorflow,
   SiPandas,
-  SiMatlab,
 } from "react-icons/si";
 
 import content from "./content";
@@ -109,7 +108,7 @@ function SkillCircleGroups() {
     "SEO": <FaSearch size={40} className="text-yellow-500" />,
     "Pandas": <SiPandas size={40} className="text-blue-600" />,
     "Excel/Numbers/Sheets": <FaFileExcel size={40} className="text-green-600" />,
-    "MATLAB": <SiMatlab size={40} className="text-orange-600" />,
+    "MATLAB": <FaChartLine size={40} className="text-orange-600" />,
   };
 
   const skillGroups = [
