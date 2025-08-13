@@ -68,9 +68,20 @@ const content = {
   experience: {
     work: [
       {
+        title: "Founding Software Engineer",
+        company: "ZenithWave Capital, London, England, United Kingdom",
+        period: "February 2025 – July 2025",
+        description: [
+          "Founding team member at a financial technology startup focused on innovative capital solutions.",
+          "Architected and developed core platform infrastructure from the ground up.",
+          "Collaborated with stakeholders to define technical vision and product roadmap.",
+          "Led engineering decisions and technology stack selection for scalable financial applications.",
+        ],
+      },
+      {
         title: "Full Stack Developer Intern",
         company: "Radical AI, London, UK",
-        period: "May 2024 – Present",
+        period: "May 2024 – Dec 2024",
         description: [
           "Designed a modular on-boarding Welcome Screen with React.js and MUI, driving a 25% increase in user engagement.",
           "Enhanced application responsiveness by 35% using custom React hooks for efficient state management.",
