@@ -28,7 +28,7 @@ export default function App() {
         <Route
           path="/"
           element={
-            <div className="relative text-gray-100 font-sans min-h-screen overflow-x-hidden">
+            <div className="relative text-gray-100 font-sans min-h-screen overflow-x-hidden bg-slate-900">
               {/* <ParticlesBackground /> */}
               <Navbar />
               <ProfileSection
