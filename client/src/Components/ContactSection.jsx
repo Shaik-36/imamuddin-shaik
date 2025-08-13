@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 export default function ContactSection() {
   return (
-    <section id="contact" className="bg-[#1f2634] py-16 px-4 text-center relative">
+    <section id="contact" className="bg-gradient-to-br from-slate-800 via-slate-900 to-slate-800 py-16 px-4 text-center relative">
       <h2 className="text-4xl font-extrabold mb-6">Contact Me</h2>
       <p className="text-gray-400 mb-6">
         Let’s connect—feel free to reach out on LinkedIn, GitHub, or Twitter!

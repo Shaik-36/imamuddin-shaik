@@ -8,7 +8,7 @@ const fadeUp = {
 
 export default function ExperienceSection({ experience }) {
   return (
-    <section id="experience" className="bg-[#1f2634] py-16 px-4 text-center">
+    <section id="experience" className="bg-gradient-to-br from-slate-800 via-slate-900 to-slate-800 py-16 px-4 text-center">
       <motion.h2
         className="text-4xl font-extrabold mb-10"
         variants={fadeUp}
