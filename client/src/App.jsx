@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import ParticlesBackground from "./Components/ParticlesBackground";
 import Navbar from "./Components/Navbar";
 import ProfileSection from "./Components/ProfileSection";
@@ -9,70 +11,125 @@ import ProjectsSection from "./Components/ProjectsSection";
 import ContactSection from "./Components/ContactSection";
 import Login from "./Components/Login/Login"; // Login component for admin login
 import AdminPanel from "./Components/Login/AdminPanel"; // AdminPanel component for project management
+import { verifyAuth } from "./utils/services";
 import content from "./content";
+
+// Create React Query client
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: 1,
+      refetchOnWindowFocus: false,
+      staleTime: 5 * 60 * 1000, // 5 minutes
+    },
+  },
+});
 
 export default function App() {
   const [selectedLanguage, setSelectedLanguage] = useState("All");
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // State to track admin login status
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isCheckingAuth, setIsCheckingAuth] = useState(true);
+  const [user, setUser] = useState(null);
 
-  const handleLogin = (token) => {
-    localStorage.setItem("adminToken", token); // Store token (optional)
-    setIsLoggedIn(true); // Update state
+  // Check authentication status on app load
+  useEffect(() => {
+    checkAuthStatus();
+  }, []);
+
+  const checkAuthStatus = async () => {
+    try {
+      const response = await verifyAuth();
+      if (response.data.success) {
+        setIsLoggedIn(true);
+        setUser(response.data.user);
+      }
+    } catch (error) {
+      // User is not authenticated - clear any existing state
+      setIsLoggedIn(false);
+      setUser(null);
+    } finally {
+      setIsCheckingAuth(false);
+    }
   };
+
+  const handleLogin = (userData) => {
+    setIsLoggedIn(true);
+    setUser(userData);
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setUser(null);
+  };
+
+  // Show loading while checking authentication
+  if (isCheckingAuth) {
+    return (
+      <div className="bg-slate-900 w-screen h-screen flex items-center justify-center">
+        <div className="text-white text-xl">Loading...</div>
+      </div>
+    );
+  }
 
 
   return (
-    <Router>
-      <Routes>
-        {/* Main Portfolio Route */}
-        <Route
-          path="/"
-          element={
-            <div className="relative text-gray-100 font-sans min-h-screen overflow-x-hidden">
-              {/* <ParticlesBackground /> */}
-              <Navbar />
-              <ProfileSection
-                personal={content.personal}
-                frontEndSkills={content.frontEndSkills}
-                backEndSkills={content.backEndSkills}
-                toolsSkills={content.toolsSkills}
-                otherTechSkills={content.otherTechSkills}
-              />
-              <ExperienceSection experience={content.experience} />
-              <ProjectsSection
-                projects={content.projects}
-                selectedLanguage={selectedLanguage}
-                setSelectedLanguage={setSelectedLanguage}
-              />
-              <SkillsSection />
-              <ContactSection personal={content.personal} />
-            </div>
-          }
-        />
-
-        {/* Admin Login Route */}
-        <Route
-          path="/admin/login"
-          element={
-            <div className="bg-slate-900 w-screen h-screen flex flex-col">
-              <Login onLogin={handleLogin} />
-            </div>
-        }
-        />
-
-        {/* Admin Panel Route (Protected) */}
-        <Route
-          path="/admin"
-          element={
-            
-            isLoggedIn ? ( <AdminPanel />) : (
-              <div className="bg-slate-900 w-screen h-screen flex flex-col">
-              <Navigate to="/admin/login" replace={true} />
+    <QueryClientProvider client={queryClient}>
+      <Router>
+        <Routes>
+          {/* Main Portfolio Route */}
+          <Route
+            path="/"
+            element={
+              <div className="relative text-gray-100 font-sans min-h-screen overflow-x-hidden">
+                {/* <ParticlesBackground /> */}
+                <Navbar />
+                <ProfileSection
+                  personal={content.personal}
+                  frontEndSkills={content.frontEndSkills}
+                  backEndSkills={content.backEndSkills}
+                  toolsSkills={content.toolsSkills}
+                  otherTechSkills={content.otherTechSkills}
+                />
+                <ExperienceSection experience={content.experience} />
+                <ProjectsSection
+                  projects={content.projects}
+                  selectedLanguage={selectedLanguage}
+                  setSelectedLanguage={setSelectedLanguage}
+                />
+                <SkillsSection />
+                <ContactSection personal={content.personal} />
               </div>
-            )
-          }
-        />
-      </Routes>
-    </Router>
+            }
+          />
+
+          {/* Admin Login Route */}
+          <Route
+            path="/admin/login"
+            element={
+              isLoggedIn ? (
+                <Navigate to="/admin" replace={true} />
+              ) : (
+                <div className="bg-slate-900 w-screen h-screen flex flex-col">
+                  <Login onLogin={handleLogin} />
+                </div>
+              )
+            }
+          />
+
+          {/* Admin Panel Route (Protected) */}
+          <Route
+            path="/admin"
+            element={
+              isLoggedIn ? (
+                <AdminPanel user={user} onLogout={handleLogout} />
+              ) : (
+                <Navigate to="/admin/login" replace={true} />
+              )
+            }
+          />
+        </Routes>
+      </Router>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   );
 }
