@@ -39,15 +39,15 @@ API.interceptors.response.use(
 export const loginAdmin = async (credentials) => {
   try {
     const response = await API.post("/admin/login", credentials);
-    return response.data.success;
+    return response;
   } catch (error) {
-    return false;
+    return error.response;
   }
 };
 
 // No auto verify or logout for now
 // export const logoutAdmin = async () => { ... }
-// export const verifyAuth = async () => { ... }
+// Removed verifyAuth. Only loginAdmin is used for authentication.
 
 // Projects CRUD APIs
 export const addProject = async (projectData) => {
@@ -197,4 +197,28 @@ export const submitContactForm = async (contactData) => {
     const errorMessage = error.response?.data?.message || error.message || 'Failed to send message';
     throw new Error(errorMessage);
   }
+};
+
+export const getAdminData = async () => {
+  return API.get('/admin/admin-data');
+};
+
+export const updateAdminData = async (data) => {
+  return API.put('/admin/admin-data', data);
+};
+
+export const getAllProjects = async () => {
+  return API.get('/admin/all-projects');
+};
+
+export const addProjectDb = async (project) => {
+  return API.post('/admin/all-projects', project);
+};
+
+export const updateProjectDb = async (id, project) => {
+  return API.put(`/admin/all-projects/${id}`, project);
+};
+
+export const deleteProjectDb = async (id) => {
+  return API.delete(`/admin/all-projects/${id}`);
 };

@@ -1,13 +1,13 @@
 import avatar from "./assets/website-logo.jpeg";
 
 // Import images explicitly at the top
-import stockPriceImg from './images/stock-price.png';
-import chatAppImg from './images/chat-app.png';
-import blogImg from './images/blog.png';
-import currencyImg from './images/currency.png';
-import passwordGeneratorImg from './images/password-generate.png';
-import keeperImg from './images/keeper.png';
-import weatherImg from './images/weather.png';
+import stockPriceImg from './assets/images/stock-price.png';
+import chatAppImg from './assets/images/chat-app.png';
+import blogImg from './assets/images/blog.png';
+import currencyImg from './assets/images/currency.png';
+import passwordGeneratorImg from './assets/images/password-generate.png';
+import keeperImg from './assets/images/keeper.png';
+import weatherImg from './assets/images/weather.png';
 
 
 

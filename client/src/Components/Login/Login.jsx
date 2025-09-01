@@ -10,37 +10,26 @@ const Login = ({ onLogin }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(null);
     setLoading(true);
-
+    setError(null);
+    
     // Basic client-side validation
     if (!credentials.username.trim() || !credentials.password.trim()) {
       setError("Please enter both username and password.");
       setLoading(false);
       return;
     }
-
+    
     try {
       const response = await loginAdmin(credentials);
-      
-      if (response.data.success) {
-        // Pass user data to parent component (no token handling needed - cookies are automatic)
+      if (response && response.data && response.data.success) {
         onLogin(response.data.user);
         navigate("/admin");
       } else {
-        setError(response.data.message || "Login failed. Please try again.");
+        setError(response?.data?.message || "Invalid username or password");
       }
-    } catch (error) {
-      // Error handling for different types of failures
-      if (error.message.includes('Too many')) {
-        setError("Too many login attempts. Please try again later.");
-      } else if (error.message.includes('credentials')) {
-        setError("Invalid username or password.");
-      } else if (error.message.includes('Network')) {
-        setError("Network error. Please check your connection.");
-      } else {
-        setError(error.message || "Login failed. Please try again.");
-      }
+    } catch (err) {
+      setError("Login failed");
     } finally {
       setLoading(false);
     }

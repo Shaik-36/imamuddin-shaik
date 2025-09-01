@@ -1,16 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { addProject, updateProject, deleteProject, getProjects } from "../../utils/services";
+import { getAdminData, updateAdminData, getAllProjects, addProjectDb, updateProjectDb, deleteProjectDb } from "../../utils/services";
 import { useNavigate } from "react-router-dom";
 
 const AdminPanel = ({ user, onLogout }) => {
+  const [adminData, setAdminData] = useState(null);
   const [projects, setProjects] = useState([]);
-  const [newProject, setNewProject] = useState({ 
-    title: "", 
-    description: "", 
-    techStack: "", 
-    link: "", 
-    image: "" 
-  });
+  const [newProject, setNewProject] = useState({ title: "", description: "", techStack: "", link: "", image: "", category: "" });
   const [editingProject, setEditingProject] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -18,15 +13,43 @@ const AdminPanel = ({ user, onLogout }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    fetchAdminData();
     fetchProjects();
   }, []);
+
+  const fetchAdminData = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const response = await getAdminData();
+      setAdminData(response.data.data);
+    } catch (error) {
+      setError(error.message || "Failed to fetch admin data");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const saveAdminData = async (data) => {
+    try {
+      setLoading(true);
+      setError(null);
+      await updateAdminData(data);
+      setSuccess("Admin data updated successfully!");
+      await fetchAdminData();
+    } catch (error) {
+      setError(error.message || "Failed to update admin data");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const fetchProjects = async () => {
     try {
       setLoading(true);
       setError(null);
-      const response = await getProjects();
-      setProjects(response.data.data || []);
+      const response = await getAllProjects();
+      setProjects(response.data.projects || []);
     } catch (error) {
       setError(error.message || "Failed to fetch projects");
     } finally {
@@ -36,18 +59,15 @@ const AdminPanel = ({ user, onLogout }) => {
 
   const handleAdd = async (e) => {
     e.preventDefault();
-    
-    // Validate required fields
     if (!newProject.title.trim() || !newProject.description.trim()) {
       setError("Title and description are required");
       return;
     }
-
     try {
       setLoading(true);
       setError(null);
-      await addProject(newProject);
-      setNewProject({ title: "", description: "", techStack: "", link: "", image: "" });
+      await addProjectDb(newProject);
+      setNewProject({ title: "", description: "", techStack: "", link: "", image: "", category: "" });
       setSuccess("Project added successfully!");
       await fetchProjects();
     } catch (error) {
@@ -59,11 +79,10 @@ const AdminPanel = ({ user, onLogout }) => {
 
   const handleUpdate = async (e) => {
     e.preventDefault();
-    
     try {
       setLoading(true);
       setError(null);
-      await updateProject(editingProject._id, editingProject);
+      await updateProjectDb(editingProject._id, editingProject);
       setEditingProject(null);
       setSuccess("Project updated successfully!");
       await fetchProjects();
@@ -78,11 +97,10 @@ const AdminPanel = ({ user, onLogout }) => {
     if (!window.confirm(`Are you sure you want to delete "${title}"?`)) {
       return;
     }
-
     try {
       setLoading(true);
       setError(null);
-      await deleteProject(id);
+      await deleteProjectDb(id);
       setSuccess("Project deleted successfully!");
       await fetchProjects();
     } catch (error) {

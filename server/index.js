@@ -10,7 +10,7 @@ const cookieParser = require("cookie-parser");
 dotenv.config();
 
 // Validate required environment variables
-const requiredEnvVars = ['MONGO_URI', 'JWT_SECRET', 'ADMIN_USERNAME', 'ADMIN_PASSWORD_HASH'];
+const requiredEnvVars = ['MONGO_URI', 'ADMIN_USERNAME', 'ADMIN_PASSWORD'];
 const missingEnvVars = requiredEnvVars.filter(envVar => !process.env[envVar]);
 
 if (missingEnvVars.length > 0) {

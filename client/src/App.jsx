@@ -11,8 +11,7 @@ import ProjectsSection from "./Components/ProjectsSection";
 import ContactSection from "./Components/ContactSection";
 import Login from "./Components/Login/Login"; // Login component for admin login
 import AdminPanel from "./Components/Login/AdminPanel"; // AdminPanel component for project management
-import { verifyAuth } from "./utils/services";
-import content from "./content";
+import { getAdminData, getAllProjects } from "./utils/services";
 
 // Create React Query client
 const queryClient = new QueryClient({
@@ -28,29 +27,25 @@ const queryClient = new QueryClient({
 export default function App() {
   const [selectedLanguage, setSelectedLanguage] = useState("All");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isCheckingAuth, setIsCheckingAuth] = useState(true);
   const [user, setUser] = useState(null);
+  const [adminData, setAdminData] = useState(null);
+  const [projects, setProjects] = useState({});
 
-  // Check authentication status on app load
   useEffect(() => {
-    checkAuthStatus();
-  }, []);
-
-  const checkAuthStatus = async () => {
-    try {
-      const response = await verifyAuth();
-      if (response.data.success) {
-        setIsLoggedIn(true);
-        setUser(response.data.user);
-      }
-    } catch (error) {
-      // User is not authenticated - clear any existing state
-      setIsLoggedIn(false);
-      setUser(null);
-    } finally {
-      setIsCheckingAuth(false);
+    async function fetchData() {
+      const res = await getAdminData();
+      setAdminData(res.data.data);
+      const projectsRes = await getAllProjects();
+      // Group projects by category for UI compatibility
+      const grouped = {};
+      (projectsRes.data.projects || []).forEach((project) => {
+        if (!grouped[project.category]) grouped[project.category] = [];
+        grouped[project.category].push(project);
+      });
+      setProjects(grouped);
     }
-  };
+    fetchData();
+  }, []);
 
   const handleLogin = (userData) => {
     setIsLoggedIn(true);
@@ -62,18 +57,7 @@ export default function App() {
     setUser(null);
   };
 
-  // Show loading while checking authentication
-  if (isCheckingAuth) {
-    return (
-      <div className="bg-slate-900 w-screen h-screen flex items-center justify-center">
-        <div className="text-white text-xl">Loading...</div>
-      </div>
-    );
-  }
-
-
   return (
-<<<<<<< HEAD
     <QueryClientProvider client={queryClient}>
       <Router>
         <Routes>
@@ -84,69 +68,36 @@ export default function App() {
               <div className="relative text-gray-100 font-sans min-h-screen overflow-x-hidden">
                 {/* <ParticlesBackground /> */}
                 <Navbar />
-                <ProfileSection
-                  personal={content.personal}
-                  frontEndSkills={content.frontEndSkills}
-                  backEndSkills={content.backEndSkills}
-                  toolsSkills={content.toolsSkills}
-                  otherTechSkills={content.otherTechSkills}
-                />
-                <ExperienceSection experience={content.experience} />
+                {adminData && (
+                  <>
+                    <ProfileSection
+                      personal={adminData.personal}
+                      summary={adminData.summary}
+                      achievements={adminData.achievements}
+                      certifications={adminData.certifications}
+                      frontEndSkills={adminData.frontEndSkills}
+                      backEndSkills={adminData.backEndSkills}
+                      toolsSkills={adminData.toolsSkills}
+                      otherTechSkills={adminData.otherTechSkills}
+                      contact={adminData.contact}
+                    />
+                    <ExperienceSection experience={adminData.experience} />
+                  </>
+                )}
                 <ProjectsSection
-                  projects={content.projects}
+                  projects={projects}
                   selectedLanguage={selectedLanguage}
                   setSelectedLanguage={setSelectedLanguage}
                 />
-                <SkillsSection />
-                <ContactSection personal={content.personal} />
-=======
-    <Router>
-      <Routes>
-        {/* Main Portfolio Route */}
-        <Route
-          path="/"
-          element={
-            <div className="relative text-gray-100 font-sans min-h-screen overflow-x-hidden bg-slate-900">
-              {/* <ParticlesBackground /> */}
-              <Navbar />
-              <ProfileSection
-                personal={content.personal}
-                frontEndSkills={content.frontEndSkills}
-                backEndSkills={content.backEndSkills}
-                toolsSkills={content.toolsSkills}
-                otherTechSkills={content.otherTechSkills}
-              />
-              <ExperienceSection experience={content.experience} />
-              <ProjectsSection
-                projects={content.projects}
-                selectedLanguage={selectedLanguage}
-                setSelectedLanguage={setSelectedLanguage}
-              />
-              <SkillsSection />
-              <ContactSection personal={content.personal} />
-            </div>
-          }
-        />
-
-        {/* Admin Login Route */}
-        <Route
-          path="/admin/login"
-          element={
-            <div className="bg-slate-900 w-screen h-screen flex flex-col">
-              <Login onLogin={handleLogin} />
-            </div>
-        }
-        />
-
-        {/* Admin Panel Route (Protected) */}
-        <Route
-          path="/admin"
-          element={
-            
-            isLoggedIn ? ( <AdminPanel />) : (
-              <div className="bg-slate-900 w-screen h-screen flex flex-col">
-              <Navigate to="/admin/login" replace={true} />
->>>>>>> 6627506af8a415096a2a3a47e7e169683ec0079a
+                {adminData && (
+                  <SkillsSection
+                    frontEndSkills={adminData.frontEndSkills}
+                    backEndSkills={adminData.backEndSkills}
+                    toolsSkills={adminData.toolsSkills}
+                    otherTechSkills={adminData.otherTechSkills}
+                  />
+                )}
+                {adminData && <ContactSection personal={adminData.personal} />}
               </div>
             }
           />

@@ -12,6 +12,11 @@ const addProject = async (req, res) => {
       projectData.image = req.file.path; // Cloudinary URL
       projectData.imagePublicId = req.file.filename; // For deletion later
     }
+    // Add new fields for multi-page content
+    projectData.summary = req.body.summary || '';
+    projectData.achievements = req.body.achievements || [];
+    projectData.certifications = req.body.certifications || [];
+    projectData.contact = req.body.contact || {};
     
     const project = new Project(projectData);
     await project.save();
@@ -80,6 +85,11 @@ const updateProject = async (req, res) => {
       updateData.image = req.file.path; // New Cloudinary URL
       updateData.imagePublicId = req.file.filename;
     }
+    // Update new fields for multi-page content
+    updateData.summary = req.body.summary || existingProject.summary;
+    updateData.achievements = req.body.achievements || existingProject.achievements;
+    updateData.certifications = req.body.certifications || existingProject.certifications;
+    updateData.contact = req.body.contact || existingProject.contact;
     
     const updatedProject = await Project.findByIdAndUpdate(
       id, 
