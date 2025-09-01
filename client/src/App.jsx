@@ -73,6 +73,7 @@ export default function App() {
 
 
   return (
+<<<<<<< HEAD
     <QueryClientProvider client={queryClient}>
       <Router>
         <Routes>
@@ -98,6 +99,54 @@ export default function App() {
                 />
                 <SkillsSection />
                 <ContactSection personal={content.personal} />
+=======
+    <Router>
+      <Routes>
+        {/* Main Portfolio Route */}
+        <Route
+          path="/"
+          element={
+            <div className="relative text-gray-100 font-sans min-h-screen overflow-x-hidden bg-slate-900">
+              {/* <ParticlesBackground /> */}
+              <Navbar />
+              <ProfileSection
+                personal={content.personal}
+                frontEndSkills={content.frontEndSkills}
+                backEndSkills={content.backEndSkills}
+                toolsSkills={content.toolsSkills}
+                otherTechSkills={content.otherTechSkills}
+              />
+              <ExperienceSection experience={content.experience} />
+              <ProjectsSection
+                projects={content.projects}
+                selectedLanguage={selectedLanguage}
+                setSelectedLanguage={setSelectedLanguage}
+              />
+              <SkillsSection />
+              <ContactSection personal={content.personal} />
+            </div>
+          }
+        />
+
+        {/* Admin Login Route */}
+        <Route
+          path="/admin/login"
+          element={
+            <div className="bg-slate-900 w-screen h-screen flex flex-col">
+              <Login onLogin={handleLogin} />
+            </div>
+        }
+        />
+
+        {/* Admin Panel Route (Protected) */}
+        <Route
+          path="/admin"
+          element={
+            
+            isLoggedIn ? ( <AdminPanel />) : (
+              <div className="bg-slate-900 w-screen h-screen flex flex-col">
+              <Navigate to="/admin/login" replace={true} />
+>>>>>>> 6627506af8a415096a2a3a47e7e169683ec0079a
               </div>
             }
           />

@@ -21,7 +21,7 @@ export default function ProfileSection({ personal, frontEndSkills, backEndSkills
   return (
     <section
       id="profile"
-      className="pt-24 pb-24 bg-gradient-to-b from-gray-900 via-[#1a1f2e] to-gray-900"
+      className="pt-24 pb-24 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900"
     >
       <div className="container mx-auto px-4 flex flex-col md:flex-row items-center gap-12">
         {/* Left: Avatar */}

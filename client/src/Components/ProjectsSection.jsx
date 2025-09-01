@@ -11,7 +11,7 @@ export default function ProjectsSection({ projects, selectedLanguage, setSelecte
       : projects[selectedLanguage] || [];
 
   return (
-    <section id="projects" className="bg-[#252c3c] py-16">
+    <section id="projects" className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-16">
       {/* Section Title */}
       <motion.h2
         className="text-4xl font-extrabold mb-10 text-center text-white"
