@@ -9,16 +9,14 @@ import passwordGeneratorImg from './images/password-generate.png';
 import keeperImg from './images/keeper.png';
 import weatherImg from './images/weather.png';
 
-
-
 const content = {
   personal: {
     name: "IMAMUDDIN SHAIK",
-    tagline: "Founding Software Engineer | Full-Stack Developer with AI",
+    tagline: "Full Stack Engineer | AI-Driven Web Developer | React & FastAPI Expert",
     description:
-      "Founding Software Engineer with expertise in React.js, Node.js, and AI integration. Based in London, I build scalable web applications and AI-powered solutions for startups and enterprises. Passionate about transforming ideas into production-ready applications with modern tech stacks.",
+      "Accomplished Software Engineer currently building AI-driven full-stack web applications with React, Next.js, and FastAPI. Experienced in end-to-end product delivery from architecture to CI/CD deployment, integrating LLMs (OpenAI GPT-4, Anthropic Claude, Google Vertex AI) using LangChain and Retrieval-Augmented Generation (RAG). Passionate about transforming business ideas into scalable, production-ready applications.",
     avatar: avatar,
-    email: "imamshan369@gmail.com",
+    email: "imamuddin.dev@gmail.com",
     phone: "+44 7342 149330",
     location: "London, England, United Kingdom",
     resumeLink: "./assets/imam_resume.pdf",
@@ -33,152 +31,171 @@ const content = {
 
   frontEndSkills: [
     "JavaScript",
-    "TypeScript", 
+    "TypeScript",
     "React.js",
-    "React Native",
     "Next.js",
     "Redux Toolkit",
     "Tailwind CSS",
-    "MUI",
-    "HTML/CSS",
+    "Material-UI",
+    "React Native",
     "Vite",
+    "HTML/CSS",
   ],
   backEndSkills: [
+    "FastAPI",
     "Node.js",
     "Express.js",
-    "FastAPI",
-    "Flask",
-    "Django",
-    "ASP.NET",
-    "MongoDB",
-    "MySQL",
-    "PostgreSQL",
-    "Firebase",
+    "RESTful APIs",
     "GraphQL",
-    "REST APIs",
+    "Microservices",
+    "Django",
+    "Flask",
   ],
   toolsSkills: [
     "AWS",
-    "Microsoft Azure",
-    "Google Cloud Platform",
-    "Docker",
-    "Git",
-    "GitHub Actions",
-    "Jest",
-    "Playwright",
-    "Postman",
+    "Firebase",
     "Vercel",
-    "Railway",
+    "Docker",
+    "Kubernetes",
+    "GitHub Actions",
+    "Jenkins",
+    "CI/CD Pipelines",
+    "Playwright",
+    "Jest",
+    "ESLint",
+    "Prettier",
+    "Postman",
   ],
   otherTechSkills: [
-    "C#",
-    "Python",
-    "Java",
-    "Machine Learning",
-    "LLM",
+    "LangChain",
+    "RAG",
+    "OpenAI GPT-4",
+    "Anthropic Claude",
+    "Google Vertex AI",
+    "Vector Databases",
+    "MongoDB",
+    "PostgreSQL",
+    "Firebase Firestore/Auth",
+    "LLM Integration",
     "Prompt Engineering",
-    "UI/UX Design",
+    "Machine Learning",
+    "Python",
+    "C#",
+    "Java",
     "Business Analytics",
-    "SEO",
-    "Pandas",
-    "Excel/Numbers/Sheets",
-    "MATLAB",
+    "UI/UX Design",
   ],
 
   experience: {
     work: [
+      {
+        title: "Software Engineer",
+        company: "Alankrita Group of Companies",
+        period: "July 2025 – Present",
+        location: "London, England, United Kingdom",
+        description: [
+          "Architecting and deploying AI-driven web platforms using Next.js 14, React 18, and TypeScript with scalable FastAPI/Node.js backends.",
+          "Integrating LLMs (OpenAI GPT-4, Anthropic Claude, Google Vertex AI) via LangChain and RAG architectures for intelligent automation.",
+          "Developing microservices and RESTful APIs across MongoDB, PostgreSQL, and Firebase with observability-first practices—structured logging, distributed tracing, and performance monitoring.",
+          "Implementing automated testing with Playwright (E2E) and Jest (unit), reducing production incidents through proactive QA coverage.",
+          "Managing CI/CD pipelines using GitHub Actions, Docker, and multi-cloud deployment (AWS, Firebase, Vercel) to achieve minute-level rollouts.",
+          "Collaborating cross-functionally with AI, UX, and product teams to prototype, test, and deploy high-impact AI features at scale.",
+        ],
+      },
       {
         title: "Founding Software Engineer",
         company: "ZenithWave Capital",
         period: "February 2025 – July 2025",
         location: "London, England, United Kingdom",
         description: [
-          "Architected and deployed the company's public-facing site using Next.js 14, React 18 + Redux Toolkit, and Tailwind CSS, optimized for performance and accessibility, now serving 200+ learners.",
-          "Used Builder.io and lovable for rapid, no-code landing page prototyping and seamless content updates by non-tech teams.",
-          "Developed and maintained backend logic using Firebase Firestore, Rowy for visual data management, and Firebase Cloud Functions for custom workflows and secure form handling.",
-          "Integrated Claude, OpenAI GPT-4, and Replit AI to enhance learning journeys, build chatbot interactions, auto-complete inputs, and dynamically populate student dashboards.",
-          "Provisioned role-based Firebase Auth, assigning and publishing access to 200+ learners and staff, with admin overrides and audit logs.",
-          "Stood up GitHub Actions CI/CD to Vercel with daily deployments along automation testing; integrated ESLint, Prettier, Playwright, Jest—cut release time from 2 days to 30 min.",
+          "Led the design and deployment of fintech and learning platforms, delivering trading tools, courses, and AI-powered insights.",
+          "Architected zenithwavecapital.com using Next.js, React, Tailwind CSS, and Firebase with modular, SEO-optimized pages and animation effects.",
+          "Developed LMS (learn.zenithwavecapital.com) integrating Zoom, Stripe, webinars, coupons, and analytics dashboards using LearnWorlds Pro and Firebase backend.",
+          "Built backend workflows with Firebase Cloud Functions, Auth, and Firestore, with Rowy for visual management and admin dashboards.",
+          "Implemented CI/CD using GitHub Actions with automated testing (Playwright + Jest) and enforced linting (ESLint, Prettier) for consistent code quality.",
+          "Maintained agile workflows with ClickUp and observability tools for proactive issue detection and performance tracking.",
         ],
       },
       {
-        title: "Front-End Developer (Internship)",
+        title: "Software Engineer",
         company: "Reality AI Lab",
-        period: "May 2024 – December 2024",
+        period: "April 2024 – January 2025",
         location: "London, England, United Kingdom",
         description: [
-          "Designed a modular onboarding Welcome Screen with React.js and MUI, styled variants prototyped in LESS and Foundation CSS, boosting user engagement by 25%",
-          "Added custom React hooks and memoisation, improving render time by 35% (Chrome DevTools INP)",
-          "Secured user login with Firebase Authentication, achieving 99.9% uptime while scaling for 10k+ users",
-          "Integrated AWS Lambda–backed REST API for profile data; wrote Postman tests and error handling middleware",
-          "Collaborated with teams to integrate Next.js for server-side rendering, increasing SEO performance by 40%",
-          "Ported the Welcome flow to React Native (Expo) as a proof-of-concept, re-using 70% of existing React code for mobile.",
+          "Built a modular onboarding UI with React.js and MUI, boosting engagement by 25%.",
+          "Optimized app performance by 35% through custom hooks and memoization.",
+          "Developed RESTful and GraphQL APIs for real-time data synchronization.",
+          "Implemented secure Firebase Authentication and OAuth for 10k+ active users.",
+          "Automated deployments via CI/CD (Jenkins, Docker, Kubernetes) with AWS hosting, cutting downtime by 30%.",
+          "Worked with UX teams to improve accessibility, responsiveness, and SEO visibility (+40% traffic).",
         ],
       },
       {
         title: "Associate Software Engineer",
         company: "DXC Technology",
         period: "August 2021 – December 2022",
-        location: "Bangalore, KA, India",
+        location: "Bangalore, India",
         description: [
-          "Worked primarily with JavaScript, building and maintaining frontend features using React.js and component libraries",
-          "Assisted in developing scalable backend services using Node.js and Express.js, handling API requests",
-          "Participated in writing and debugging RESTful APIs, ensuring smooth communication between frontend and backend",
-          "Contributed to responsive UI development using Tailwind CSS, enhancing user experience across devices",
-          "Supported integration of JWT authentication for secure session management and user access control",
-          "Collaborated with senior developers to deploy apps on AWS and automate workflows via CI/CD pipelines.",
+          "Developed responsive web interfaces using React.js and JavaScript frameworks.",
+          "Collaborated with design teams to enhance UI/UX and improve engagement.",
+          "Integrated RESTful APIs for seamless frontend–backend communication.",
+          "Optimized performance, reducing page load times by 20%.",
+          "Participated in Agile sprints, code reviews, and assisted system migration from legacy apps.",
         ],
       },
     ],
     education: [
       {
-        degree: "Master's, Computer Science",
+        degree: "Master of Science, Computer Science",
         institution: "University of Huddersfield",
         period: "January 2023 – January 2024",
         gpa: "GPA: 4",
       },
       {
-        degree: "Bachelor's, Mechanical Engineering",
+        degree: "Bachelor of Engineering, Mechanical Engineering",
         institution: "Jawaharlal Nehru Technological University",
-        period: "July 2017 – July 2021",
+        period: "August 2017 – August 2021",
         gpa: "GPA: 4",
       },
     ],
   },
 
-  projects : {
+  projects: {
     "Machine-Learning": [
       {
         title: "Stock Price Prediction using LSTM & Sentiment Analysis",
         description:
-          "Predicts future stock prices based on historical data while integrating sentiment analysis from news articles and social media.",
-        techStack: "Python, TensorFlow, LSTM, Pandas, NumPy, Scikit-learn, VADER, TextBlob, Yahoo Finance API, React, Tailwind CSS, Appwrite",
+          "Predicts stock price trends by combining LSTM models with sentiment data from financial news and social media for better forecasting accuracy.",
+        techStack:
+          "Python, TensorFlow, LSTM, Pandas, NumPy, Scikit-learn, VADER, TextBlob, Yahoo Finance API, React, Tailwind CSS, Appwrite",
         link: "https://github.com/Shaik-36/stock-price-prediction-dissertation",
         image: stockPriceImg,
-      }, 
+      },
     ],
-  
+
     "JavaScript": [
       {
         title: "Realtime Chat Application",
         description:
-          "A real-time chat application with messaging, notifications, and online status tracking, built using React, Node.js, and Socket.io.",
-        techStack: "React, Node.js, Express, MongoDB, Socket.io, JWT, Context API, bcrypt, React Bootstrap",
+          "A modern chat application with instant messaging, notifications, and status tracking using React, Node.js, and Socket.io.",
+        techStack:
+          "React, Node.js, Express, MongoDB, Socket.io, JWT, Context API, bcrypt, React Bootstrap",
         link: "https://github.com/Shaik-36/chat-app",
         image: chatAppImg,
       },
       {
         title: "Blog Website",
         description:
-          "A feature-rich blog website built using React for the frontend and Appwrite for the backend, supporting authentication, rich text editing, and media storage.",
-        techStack: "React, Appwrite, Redux Toolkit, TinyMCE, HTML React Parser, React Hook Form, Tailwind CSS",
+          "A feature-rich blog app with authentication, post management, and media uploads using Appwrite and React.",
+        techStack:
+          "React, Appwrite, Redux Toolkit, TinyMCE, HTML React Parser, React Hook Form, Tailwind CSS",
         link: "https://github.com/Shaik-36/react-appwrite-blog-app",
         image: blogImg,
       },
       {
         title: "Currency Converter",
         description:
-          "A real-time currency converter that fetches current exchange rates via an API and displays the conversion using React and Tailwind CSS.",
+          "Real-time exchange rate converter fetching live API data using React and Tailwind CSS.",
         techStack: "React, Tailwind CSS, Vite, API Integration",
         link: "https://github.com/Shaik-36/currency-converter",
         image: currencyImg,
@@ -186,7 +203,7 @@ const content = {
       {
         title: "Password Generator",
         description:
-          "A secure password generator built using React that allows users to generate random passwords with adjustable length, numbers, and special characters, displaying the password strength dynamically.",
+          "Customizable password generator displaying real-time strength indicators.",
         techStack: "React, Tailwind CSS, React Hooks",
         link: "https://github.com/Shaik-36/password_generator",
         image: passwordGeneratorImg,
@@ -194,7 +211,7 @@ const content = {
       {
         title: "Keeper Notes App",
         description:
-          "A simple and elegant note-taking app built using React and Material UI. Users can add and delete notes dynamically, with a clean UI inspired by Google Keep.",
+          "A simple note-taking app inspired by Google Keep, built with React and MUI.",
         techStack: "React, Material UI, JavaScript, HTML/CSS3",
         link: "https://github.com/Shaik-36/keeper-app-react",
         image: keeperImg,
@@ -202,20 +219,17 @@ const content = {
       {
         title: "Weather App",
         description:
-          "A modern weather application built using React that fetches real-time weather data from an API and displays temperature, humidity, wind speed, and other weather parameters.",
+          "A responsive weather dashboard displaying real-time climate parameters using public APIs.",
         techStack: "React, API Integration, Tailwind CSS, Vite",
         link: "https://github.com/Shaik-36/Weather_Show",
         image: weatherImg,
-      }
+      },
     ],
-  
-    "Python": [],
-  
-    "Java": [],
-  
-    "C#": []
-  },
 
+    "Python": [],
+    "Java": [],
+    "C#": [],
+  },
 };
 
 export default content;
