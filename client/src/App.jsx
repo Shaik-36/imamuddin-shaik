@@ -9,8 +9,8 @@ import SkillsSection from "./Components/SkillsSection";
 import ExperienceSection from "./Components/ExperienceSection";
 import ProjectsSection from "./Components/ProjectsSection";
 import ContactSection from "./Components/ContactSection";
-import Login from "./Components/Login/Login"; // Login component for admin login
-import AdminPanel from "./Components/Login/AdminPanel"; // AdminPanel component for project management
+import Login from "./Components/Login/Login";
+import AdminPanel from "./Components/Login/AdminPanel";
 import { verifyAuth } from "./utils/services";
 import content from "./content";
 
@@ -44,7 +44,6 @@ export default function App() {
         setUser(response.data.user);
       }
     } catch (error) {
-      // User is not authenticated - clear any existing state
       setIsLoggedIn(false);
       setUser(null);
     } finally {
@@ -71,9 +70,7 @@ export default function App() {
     );
   }
 
-
   return (
-<<<<<<< HEAD
     <QueryClientProvider client={queryClient}>
       <Router>
         <Routes>
@@ -81,7 +78,7 @@ export default function App() {
           <Route
             path="/"
             element={
-              <div className="relative text-gray-100 font-sans min-h-screen overflow-x-hidden">
+              <div className="relative text-gray-100 font-sans min-h-screen overflow-x-hidden bg-slate-900">
                 {/* <ParticlesBackground /> */}
                 <Navbar />
                 <ProfileSection
@@ -99,54 +96,6 @@ export default function App() {
                 />
                 <SkillsSection />
                 <ContactSection personal={content.personal} />
-=======
-    <Router>
-      <Routes>
-        {/* Main Portfolio Route */}
-        <Route
-          path="/"
-          element={
-            <div className="relative text-gray-100 font-sans min-h-screen overflow-x-hidden bg-slate-900">
-              {/* <ParticlesBackground /> */}
-              <Navbar />
-              <ProfileSection
-                personal={content.personal}
-                frontEndSkills={content.frontEndSkills}
-                backEndSkills={content.backEndSkills}
-                toolsSkills={content.toolsSkills}
-                otherTechSkills={content.otherTechSkills}
-              />
-              <ExperienceSection experience={content.experience} />
-              <ProjectsSection
-                projects={content.projects}
-                selectedLanguage={selectedLanguage}
-                setSelectedLanguage={setSelectedLanguage}
-              />
-              <SkillsSection />
-              <ContactSection personal={content.personal} />
-            </div>
-          }
-        />
-
-        {/* Admin Login Route */}
-        <Route
-          path="/admin/login"
-          element={
-            <div className="bg-slate-900 w-screen h-screen flex flex-col">
-              <Login onLogin={handleLogin} />
-            </div>
-        }
-        />
-
-        {/* Admin Panel Route (Protected) */}
-        <Route
-          path="/admin"
-          element={
-            
-            isLoggedIn ? ( <AdminPanel />) : (
-              <div className="bg-slate-900 w-screen h-screen flex flex-col">
-              <Navigate to="/admin/login" replace={true} />
->>>>>>> 6627506af8a415096a2a3a47e7e169683ec0079a
               </div>
             }
           />
@@ -178,6 +127,7 @@ export default function App() {
           />
         </Routes>
       </Router>
+
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
