@@ -163,6 +163,15 @@ const content = {
   projects: {
     "Machine-Learning": [
       {
+        title: "FlexyWork AI – AI Workforce Agent",
+        description:
+          "Enterprise-grade AI-powered workforce automation platform for shift confirmations and staff coordination. Built MVP now rolling out to security and healthcare clients. Integrates AI, voice, SMS, and real-time dashboards to cut manual scheduling by 60%.",
+        techStack:
+          "FastAPI, React + Vite, Tailwind CSS, MongoDB, Twilio Voice/SMS, Builder.io, Lovable, Claude AI, Replit AI, OpenAI GPT-4, JWT, CORS, Excel Upload, RAG Pipeline",
+        link: "https://www.flexyworkai.com/", // (replace with actual repo or demo URL)
+        image: FlexyWork-AI-Image, // or use a new image: e.g., flexyworkImg
+      },
+      {
         title: "Stock Price Prediction using LSTM & Sentiment Analysis",
         description:
           "Predicts stock price trends by combining LSTM models with sentiment data from financial news and social media for better forecasting accuracy.",
