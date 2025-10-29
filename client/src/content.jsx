@@ -169,7 +169,7 @@ const content = {
         techStack:
           "FastAPI, React + Vite, Tailwind CSS, MongoDB, Twilio Voice/SMS, Builder.io, Lovable, Claude AI, Replit AI, OpenAI GPT-4, JWT, CORS, Excel Upload, RAG Pipeline",
         link: "https://www.flexyworkai.com/", // (replace with actual repo or demo URL)
-        image: FlexyWork-AI-Image, // or use a new image: e.g., flexyworkImg
+        image: FlexyWork, // or use a new image: e.g., flexyworkImg
       },
       {
         title: "Stock Price Prediction using LSTM & Sentiment Analysis",
