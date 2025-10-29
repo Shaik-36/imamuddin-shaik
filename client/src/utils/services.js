@@ -3,7 +3,7 @@ import axios from "axios";
 // Create API instance with secure configuration
 const API = axios.create({ 
   baseURL: import.meta.env.VITE_API_URL || "http://localhost:5000",
-  withCredentials: true, // Important: This enables cookies to be sent with requests
+  withCredentials: true, // Enables cookies to be sent with requests
   timeout: 10000, // 10 second timeout
   headers: {
     'Content-Type': 'application/json'
@@ -12,21 +12,14 @@ const API = axios.create({
 
 // Request interceptor to handle errors globally
 API.interceptors.request.use(
-  (config) => {
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
+  (config) => config,
+  (error) => Promise.reject(error)
 );
 
 // Response interceptor to handle authentication errors
 API.interceptors.response.use(
-  (response) => {
-    return response;
-  },
+  (response) => response,
   (error) => {
-    // Handle 401 errors (unauthorized)
     if (error.response?.status === 401) {
       // Token expired or invalid - redirect to login
       window.location.href = '/admin/login';
@@ -34,6 +27,18 @@ API.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
+// ✅ VERIFY AUTH (added to fix build)
+export const verifyAuth = async () => {
+  try {
+    const response = await API.get("/admin/verify");
+    // Expected shape: { success: true, user: {...} }
+    return response;
+  } catch (error) {
+    // Return a consistent shape even if request fails
+    return { data: { success: false, user: null } };
+  }
+};
 
 // Simple login API: returns true if login is successful, false otherwise
 export const loginAdmin = async (credentials) => {
@@ -45,33 +50,23 @@ export const loginAdmin = async (credentials) => {
   }
 };
 
-// No auto verify or logout for now
-// export const logoutAdmin = async () => { ... }
-// export const verifyAuth = async () => { ... }
-
 // Projects CRUD APIs
 export const addProject = async (projectData) => {
   try {
     const formData = new FormData();
-    
-    // Append all project fields
+
     Object.keys(projectData).forEach(key => {
       if (key === 'tags' && Array.isArray(projectData[key])) {
-        // Handle tags array
         projectData[key].forEach(tag => formData.append('tags', tag));
       } else if (key === 'image' && projectData[key] instanceof File) {
-        // Handle file upload
         formData.append('image', projectData[key]);
       } else if (key !== 'image') {
-        // Handle regular fields (skip image if it's not a file)
         formData.append(key, projectData[key]);
       }
     });
-    
+
     const response = await API.post("/admin/projects", formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
+      headers: { 'Content-Type': 'multipart/form-data' },
     });
     return response;
   } catch (error) {
@@ -83,25 +78,19 @@ export const addProject = async (projectData) => {
 export const updateProject = async (id, projectData) => {
   try {
     const formData = new FormData();
-    
-    // Append all project fields
+
     Object.keys(projectData).forEach(key => {
       if (key === 'tags' && Array.isArray(projectData[key])) {
-        // Handle tags array
         projectData[key].forEach(tag => formData.append('tags', tag));
       } else if (key === 'image' && projectData[key] instanceof File) {
-        // Handle file upload
         formData.append('image', projectData[key]);
       } else if (key !== 'image' || typeof projectData[key] === 'string') {
-        // Handle regular fields and existing image URLs
         formData.append(key, projectData[key]);
       }
     });
-    
+
     const response = await API.put(`/admin/projects/${id}`, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
+      headers: { 'Content-Type': 'multipart/form-data' },
     });
     return response;
   } catch (error) {
@@ -175,11 +164,9 @@ export const uploadImage = async (imageFile) => {
   try {
     const formData = new FormData();
     formData.append('image', imageFile);
-    
+
     const response = await API.post("/admin/upload", formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
+      headers: { 'Content-Type': 'multipart/form-data' },
     });
     return response;
   } catch (error) {
