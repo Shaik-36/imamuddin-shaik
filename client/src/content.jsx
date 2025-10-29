@@ -8,6 +8,7 @@ import currencyImg from './images/currency.png';
 import passwordGeneratorImg from './images/password-generate.png';
 import keeperImg from './images/keeper.png';
 import weatherImg from './images/weather.png';
+import FlexyWork from './images/FlexyWork.png';
 
 const content = {
   personal: {
