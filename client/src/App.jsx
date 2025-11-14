@@ -8,6 +8,7 @@ import ProfileSection from "./Components/ProfileSection";
 import SkillsSection from "./Components/SkillsSection";
 import ExperienceSection from "./Components/ExperienceSection";
 import ProjectsSection from "./Components/ProjectsSection";
+import TechCommunitySection from "./Components/TechCommunitySection";
 import ContactSection from "./Components/ContactSection";
 import Login from "./Components/Login/Login";
 import AdminPanel from "./Components/Login/AdminPanel";
@@ -88,12 +89,14 @@ export default function App() {
                   toolsSkills={content.toolsSkills}
                   otherTechSkills={content.otherTechSkills}
                 />
+                <TechCommunitySection talks={content.talks} />
                 <ExperienceSection experience={content.experience} />
                 <ProjectsSection
                   projects={content.projects}
                   selectedLanguage={selectedLanguage}
                   setSelectedLanguage={setSelectedLanguage}
                 />
+                
                 <SkillsSection />
                 <ContactSection personal={content.personal} />
               </div>
