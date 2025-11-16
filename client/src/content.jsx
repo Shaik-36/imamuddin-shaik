@@ -250,7 +250,7 @@ const content = {
       description:
         "Spoke at PyData London on moving beyond bigger AI models to building truly reliable AI systems. Shared practical strategies for turning agent demos into production-grade products covering robust context engineering, session and role management, prompt versioning, and end-to-end traceability. Thankful for the engaged crowd and insightful questions around data isolation, context, and next-generation agent architectures. Always open to connect on building dependable, human-in-the-loop AI.",
       image: pyDataImg,
-      link: "#",
+      link: "https://www.linkedin.com/feed/update/urn:li:activity:7368975311587143680/",
     },
     {
       title: "LangChain London",
@@ -258,7 +258,7 @@ const content = {
       description:
         "Honoured to join the LangChain London community as a speaker, closing out 2025 by showcasing how advanced agents, tool integrations, and retrieval-augmented generation (RAG) are powering smarter workflows and real business value. Inspired by the discussions and innovations from fellow ML engineers and builders demonstrating the rapid evolution of agentic architectures from prototype to production. Looking forward to more collaboration and AI innovation with this amazing group!",
       image: langChainImg,
-      link: "#",
+      link: "https://www.linkedin.com/feed/update/urn:li:activity:7394294193793286145/",
     },
   ],
 };
